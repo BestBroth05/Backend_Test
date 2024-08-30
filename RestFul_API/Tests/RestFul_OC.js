@@ -4,7 +4,7 @@ const sql  = require('mssql');
 
 router.post('/post', (req, res) =>
 {
-    let id_OC = req.body.id_OC;
+    let OC = req.body.OC;
     let id_customer = req.body.id_customer;
     let fecha_inicio = req.body.fecha_inicio;
     let fecha_fin = req.body.fecha_fin;
@@ -16,6 +16,9 @@ router.post('/post', (req, res) =>
     let street = req.body.street;
     let prioridad = req.body.prioridad;
     let moneda = req.body.moneda;
+    let descripcion = req.body.descripcion;
+    let cantidad = req.body.cantidad;
+    let prefijo = req.body.prefijo;
     
     const ServerConfig = require('../server/config');
     var sql = require("mssql");
@@ -28,8 +31,8 @@ router.post('/post', (req, res) =>
         else {
             let request = new sql.Request();
             //Ad new Exceptions here
-            var dataBody = ["'"+id_OC+"'","'"+id_customer+"'","'"+fecha_inicio+"'","'"+fecha_fin+"'","'"+solicitante+"'","'"+country+"'","'"+state+"'","'"+city+"'","'"+cp+"'","'"+street+"'","'"+prioridad+"'","'"+moneda+"'"];
-            var QueryCmd = "INSERT INTO OrdenCompra (id_OC, id_customer, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda) VALUES ("+dataBody+")";
+            var dataBody = ["'"+OC+"'","'"+id_customer+"'","'"+fecha_inicio+"'","'"+fecha_fin+"'","'"+solicitante+"'","'"+country+"'","'"+state+"'","'"+city+"'","'"+cp+"'","'"+street+"'","'"+prioridad+"'","'"+moneda+"'","'"+descripcion+"'","'"+cantidad+"'","'"+prefijo+"'"];
+            var QueryCmd = "INSERT INTO OrdenCompra (OC, id_customer, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda, descripcion, cantidad, prefijo) VALUES ("+dataBody+")";
                 
             request.query(QueryCmd, function (err, data) {
                 if (err) {
@@ -66,7 +69,7 @@ router.get('/get', (req, res) =>
             else {
                 // create Request objCountryect
             let request = new sql.Request();
-            let QueryCmd = "SELECT id_OC, id_customer, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda FROM OrdenCompra";
+            let QueryCmd = "SELECT id_OC, id_customer, OC, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda, descripcion, cantidad, prefijo FROM OrdenCompra";
             request.query(QueryCmd, function (err, data) {
                 if (err) {
                     console.log(err);
@@ -145,7 +148,7 @@ router.post('/select/orden', (req, res) =>
             else {
                 let request = new sql.Request();
                 //Ad new Exceptions here
-                let QueryCmd = "SELECT id_OC, id_customer, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda FROM OrdenCompra WHERE id_OC = "+id_OC;
+                let QueryCmd = "SELECT id_OC, id_customer, OC, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda, descripcion, cantidad, prefijo FROM OrdenCompra WHERE id_OC = "+id_OC;
                             
                 request.query(QueryCmd, function (err, data) {
                     if (err) {
@@ -185,7 +188,7 @@ router.post('/select/orden', (req, res) =>
                 else {
                     let request = new sql.Request();
                     //Ad new Exceptions here
-                    let QueryCmd = "SELECT id_OC, id_customer, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda FROM OrdenCompra WHERE id_customer = "+id_customer;
+                    let QueryCmd = "SELECT id_OC, id_customer, OC, fecha_inicio, fecha_fin, solicitante, pais, estado, ciudad, cp, street, prioridad, moneda, descripcion, cantidad, prefijo FROM OrdenCompra WHERE id_customer = "+id_customer;
                                 
                     request.query(QueryCmd, function (err, data) {
                         if (err) {
@@ -214,6 +217,7 @@ router.post('/select/orden', (req, res) =>
         router.post('/update', (req, res) =>
             {
                 let id_OC = req.body.id_OC;
+                let OC = req.body.OC;
                 let id_customer = req.body.id_customer;
                 let fecha_inicio = req.body.fecha_inicio;
                 let fecha_fin = req.body.fecha_fin;
@@ -225,6 +229,9 @@ router.post('/select/orden', (req, res) =>
                 let street = req.body.street;
                 let prioridad = req.body.prioridad;
                 let moneda = req.body.moneda;
+                let descripcion = req.body.descripcion;
+                let cantidad = req.body.cantidad;
+                let prefijo = req.body.prefijo;
                 
                 const ServerConfig = require('../server/config');
                 var sql = require("mssql");
@@ -237,7 +244,7 @@ router.post('/select/orden', (req, res) =>
                     else {
                         let request = new sql.Request();
                         //Ad new Exceptions here
-                        var QueryCmd = "UPDATE OrdenCompra SET id_customer = '"+id_customer+"', fecha_inicio = '"+fecha_inicio+"', fecha_fin = '"+fecha_fin+"', solicitante = '"+solicitante+"', pais = '"+country+"', estado = '"+state+"', ciudad = '"+city+"', cp = '"+cp+"', street = '"+street+"', prioridad = '"+prioridad+"', moneda = '"+moneda+"' WHERE id_OC = "+id_OC;
+                        var QueryCmd = "UPDATE OrdenCompra SET id_customer = '"+id_customer+"', OC = '"+OC+"', fecha_inicio = '"+fecha_inicio+"', fecha_fin = '"+fecha_fin+"', solicitante = '"+solicitante+"', pais = '"+country+"', estado = '"+state+"', ciudad = '"+city+"', cp = '"+cp+"', street = '"+street+"', prioridad = '"+prioridad+"', moneda = '"+moneda+"', descripcion = '"+descripcion+"', cantidad = '"+cantidad+"', prefijo = '"+prefijo+"' WHERE id_OC = "+id_OC;
                             
                         request.query(QueryCmd, function (err, data) {
                             if (err) {

@@ -39,10 +39,10 @@ app.use((req, res, next) => {
 app.use('/get/cortes', RestFul_Cortes_GET);
 app.use('/get/empleados', RestFul_Empleados_GET);
 app.use('/get/pagos', RestFul_Pagos_GET);
-app.use('/test', test);
-app.use('/oc', RestFul_OC);
-app.use('/entrega', RestFul_Entrega);
-app.use('/productos', RestFul_Productos_OC);
+app.use('/Customers', test);
+app.use('/OrdenCompra', RestFul_OC);
+app.use('/Entregas', RestFul_Entrega);
+app.use('/ProductosOC', RestFul_Productos_OC);
 app.use('/upload', vidios);
 app.set({
     "Content-Type": "application/json",

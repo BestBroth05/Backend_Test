@@ -8,6 +8,9 @@ router.post('/post', (req, res) =>
     let certificado_entrega = req.body.certificado_entrega;
     let fecha = req.body.fecha;
     let notes = req.body.notes;
+    let direccion = req.body.direccion;
+    let solicitante = req.body.solicitante;
+    let remitente = req.body.remitente;
     
     const ServerConfig = require('../server/config');
     var sql = require("mssql");
@@ -20,8 +23,8 @@ router.post('/post', (req, res) =>
         else {
             let request = new sql.Request();
             //Ad new Exceptions here
-            var dataBody = ["'"+id_OC+"'","'"+certificado_entrega+"'","'"+fecha+"'","'"+notes+"'"];
-            var QueryCmd = "INSERT INTO CertificadoEntrega (id_OC, CertificadoEntrega, Fecha, Notes) VALUES ("+dataBody+")";
+            var dataBody = ["'"+id_OC+"'","'"+certificado_entrega+"'","'"+fecha+"'","'"+notes+"'","'"+direccion+"'","'"+solicitante+"'","'"+remitente+"'"];
+            var QueryCmd = "INSERT INTO CertificadoEntrega (id_OC, CertificadoEntrega, Fecha, Notes, Direccion, Solicitante, Remitente) VALUES ("+dataBody+")";
                 
             request.query(QueryCmd, function (err, data) {
                 if (err) {
@@ -58,7 +61,7 @@ router.get('/get', (req, res) =>
             else {
                 // create Request objCountryect
             let request = new sql.Request();
-            let QueryCmd = "SELECT id_OC, id_Entrega, CertificadoEntrega, Fecha FROM CertificadoEntrega";
+            let QueryCmd = "SELECT id_OC, id_Entrega, CertificadoEntrega, Fecha, Notes, Direccion, Solicitante, Remitente FROM CertificadoEntrega";
             request.query(QueryCmd, function (err, data) {
                 if (err) {
                     console.log(err);
@@ -137,7 +140,7 @@ router.post('/select', (req, res) =>
             else {
                 let request = new sql.Request();
                 //Ad new Exceptions here
-                let QueryCmd = "SELECT id_OC, id_Entrega, CertificadoEntrega, Fecha, Notes FROM CertificadoEntrega WHERE id_OC = "+id_OC;
+                let QueryCmd = "SELECT id_OC, id_Entrega, CertificadoEntrega, Fecha, Notes, Direccion, Solicitante, Remitente FROM CertificadoEntrega WHERE id_OC = "+id_OC;
                             
                 request.query(QueryCmd, function (err, data) {
                     if (err) {
@@ -210,6 +213,9 @@ router.post('/select', (req, res) =>
                 let CertificadoEntrega = req.body.CertificadoEntrega;
                 let fecha = req.body.fecha;
                 let notes = req.body.notes;
+                let direccion = req.body.direccion;
+                let solicitante = req.body.solicitante;
+                let remitente = req.body.remitente;
                 
                 const ServerConfig = require('../server/config');
                 var sql = require("mssql");
@@ -222,7 +228,7 @@ router.post('/select', (req, res) =>
                     else {
                         let request = new sql.Request();
                         //Ad new Exceptions here
-                        var QueryCmd = "UPDATE CertificadoEntrega SET CertificadoEntrega = '"+CertificadoEntrega+"', Fecha = '"+fecha+"', Notes = '"+notes+"' WHERE id_Entrega = "+id_Entrega;
+                        var QueryCmd = "UPDATE CertificadoEntrega SET CertificadoEntrega = '"+CertificadoEntrega+"', Fecha = '"+fecha+"', Notes = '"+notes+"', Direccion = '"+direccion+"', Solicitante = '"+solicitante+"', Remitente = '"+remitente+"' WHERE id_Entrega = "+id_Entrega;
                             
                         request.query(QueryCmd, function (err, data) {
                             if (err) {
