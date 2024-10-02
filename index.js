@@ -18,6 +18,10 @@ const RestFul_OC = require('./RestFul_API/Tests/RestFul_OC');
 const RestFul_Entrega = require('./RestFul_API/Tests/RestFul_Entrega');
 const RestFul_Productos_OC = require('./RestFul_API/Tests/RestFul_Productos_OC');
 const vidios = require('./RestFul_API/Tests/UploadVideos');
+const RestFul_Quotes = require('./RestFul_API/Tests/RestFul_Quotes');
+const RestFul_Digikey = require('./RestFul_API/Tests/RestFul_Digikeys');
+const RestFul_Porcentajes = require('./RestFul_API/Tests/RestFul_Porcentajes');
+
 const RestFul_Cortes_POST = require('./RestFul_API/POST/RestFul_Cortes_POST');
 const RestFul_Empleados_POST = require('./RestFul_API/POST/RestFul_Empleados_POST');
 const RestFul_Pagos_POST = require('./RestFul_API/POST/RestFul_Pagos_POST');
@@ -44,6 +48,9 @@ app.use('/OrdenCompra', RestFul_OC);
 app.use('/Entregas', RestFul_Entrega);
 app.use('/ProductosOC', RestFul_Productos_OC);
 app.use('/upload', vidios);
+app.use('/quotes', RestFul_Quotes);
+app.use('/digikeys', RestFul_Digikey);
+app.use('/porcentajes', RestFul_Porcentajes);
 app.set({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
