@@ -21,6 +21,7 @@ const vidios = require('./RestFul_API/Tests/UploadVideos');
 const RestFul_Quotes = require('./RestFul_API/Tests/RestFul_Quotes');
 const RestFul_Digikey = require('./RestFul_API/Tests/RestFul_Digikeys');
 const RestFul_Porcentajes = require('./RestFul_API/Tests/RestFul_Porcentajes');
+const RestFul_Preview = require('./RestFul_API/Tests/RestFul_QuotesPreview');
 
 const RestFul_Cortes_POST = require('./RestFul_API/POST/RestFul_Cortes_POST');
 const RestFul_Empleados_POST = require('./RestFul_API/POST/RestFul_Empleados_POST');
@@ -51,6 +52,7 @@ app.use('/upload', vidios);
 app.use('/quotes', RestFul_Quotes);
 app.use('/digikeys', RestFul_Digikey);
 app.use('/porcentajes', RestFul_Porcentajes);
+app.use('/preview', RestFul_Preview);
 app.set({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
