@@ -16,8 +16,6 @@ router.post('/post', (req, res) =>
     let cp = req.body.cp;
     let street = req.body.street;
     let logo = req.body.logo;
-
-    
     
     const ServerConfig = require('../server/config');
     var sql = require("mssql");
@@ -188,8 +186,6 @@ router.post('/select', (req, res) =>
                 let cp = req.body.cp;
                 let street = req.body.street;
                 let logo = req.body.logo;
-            
-                
                 
                 const ServerConfig = require('../server/config');
                 var sql = require("mssql");

@@ -6,6 +6,8 @@ router.post('/post', (req, res) =>
 {
     let id_entrega = req.body.id_entrega;
     let id_OC = req.body.id_OC;
+    let id_quote = req.body.id_quote;
+    let image = req.body.image;
     let cantidad = req.body.cantidad;
     let descripcion = req.body.descripcion;
     let precio_unitario = req.body.precio_unitario;
@@ -22,8 +24,8 @@ router.post('/post', (req, res) =>
         else {
             let request = new sql.Request();
             //Ad new Exceptions here
-            var dataBody = ["'"+id_entrega+"'","'"+id_OC+"'","'"+cantidad+"'","'"+descripcion+"'","'"+precio_unitario+"'","'"+importe+"'"];
-            var QueryCmd = "INSERT INTO ProductosOC (id_entrega, id_OC, cantidad, descripcion, precio_unitario, importe) VALUES ("+dataBody+")";
+            var dataBody = ["'"+id_entrega+"'","'"+id_OC+"'","'"+id_quote+"'","'"+image+"'","'"+cantidad+"'","'"+descripcion+"'","'"+precio_unitario+"'","'"+importe+"'"];
+            var QueryCmd = "INSERT INTO ProductosOC (id_entrega, id_OC, id_quote, image, cantidad, descripcion, precio_unitario, importe) VALUES ("+dataBody+")";
                 
             request.query(QueryCmd, function (err, data) {
                 if (err) {
@@ -60,7 +62,7 @@ router.get('/get', (req, res) =>
             else {
                 // create Request objCountryect
             let request = new sql.Request();
-            let QueryCmd = "SELECT id_producto, id_entrega, id_OC, cantidad, descripcion, precio_unitario, importe FROM ProductosOC";
+            let QueryCmd = "SELECT id_producto, id_entrega, id_OC, id_quote, image, cantidad, descripcion, precio_unitario, importe FROM ProductosOC";
             request.query(QueryCmd, function (err, data) {
                 if (err) {
                     console.log(err);
@@ -140,7 +142,7 @@ router.post('/select', (req, res) =>
                 let request = new sql.Request();
                 //Ad new Exceptions here
                 var dataBody = "'"+id_entrega+"'";
-                let QueryCmd = "SELECT id_producto, id_entrega, id_OC, cantidad, descripcion, precio_unitario, importe FROM ProductosOC WHERE id_entrega = "+dataBody+"";
+                let QueryCmd = "SELECT id_producto, id_entrega, id_OC, id_quote, image, cantidad, descripcion, precio_unitario, importe FROM ProductosOC WHERE id_entrega = "+dataBody+"";
                             
                 request.query(QueryCmd, function (err, data) {
                     if (err) {
@@ -211,6 +213,8 @@ router.post('/select', (req, res) =>
                 let id_producto = req.body.id_producto;
                 let id_entrega = req.body.id_entrega;
                 let id_OC = req.body.id_OC;
+                let id_quote = req.body.id_quote;
+                let image = req.body.image;
                 let precioUnitario = req.body.precioUnitario;
                 let cantidad = req.body.cantidad;
                 let descripcion = req.body.descripcion;
@@ -227,7 +231,7 @@ router.post('/select', (req, res) =>
                     else {
                         let request = new sql.Request();
                         //Ad new Exceptions here
-                        var QueryCmd = "UPDATE ProductosOC SET id_entrega = '"+id_entrega+"', id_OC = '"+id_OC+"', precio_unitario = '"+precioUnitario+"', cantidad = '"+cantidad+"', descripcion = '"+descripcion+"', importe = '"+importe+"' WHERE id_producto = "+id_producto;
+                        var QueryCmd = "UPDATE ProductosOC SET id_entrega = '"+id_entrega+"', id_OC = '"+id_OC+"', id_quote = '"+id_quote+"', image = '"+image+"', precio_unitario = '"+precioUnitario+"', cantidad = '"+cantidad+"', descripcion = '"+descripcion+"', importe = '"+importe+"' WHERE id_producto = "+id_producto;
                             
                         request.query(QueryCmd, function (err, data) {
                             if (err) {
